@@ -1,0 +1,21 @@
+name = "cloudflare"
+compatibility_date = "2023-12-01"
+
+[vars]
+MY_VAR = "my-variable"
+
+# [[kv_namespaces]]
+# binding = "MY_KV_NAMESPACE"
+# id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+# [[r2_buckets]]
+# binding = "MY_BUCKET"
+# bucket_name = "my-bucket"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "cloudflare-d1"
+database_id = "f55aa2ce-1667-4f32-aaff-b53cfcd5e20d"
+
+# [ai]
+# binding = "AI"

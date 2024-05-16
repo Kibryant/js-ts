@@ -1,0 +1,11 @@
+POST http://localhost:8787/create-post HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "My second post",
+  "content": "Hello, world!"
+}
+
+###
+
+GET http://localhost:8787 HTTP/1.1

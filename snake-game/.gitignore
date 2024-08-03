@@ -36,3 +36,9 @@ yarn-error.log*
 # Misc
 .DS_Store
 *.pem
+
+# Editor directories
+.vscode
+
+# Coverage directory used by tools like istanbul
+coverage

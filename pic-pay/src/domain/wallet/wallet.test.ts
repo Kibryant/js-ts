@@ -1,35 +1,70 @@
-import { Wallet } from "./wallet";
+import { describe, it, expect } from "vitest";
+import Wallet, { WalletType } from "./wallet";
 
 describe("Wallet", () => {
-    const walletData = {
-        fullName: "John Doe",
-        cpf: "12345678900",
-        email: "john@example.com",
-        phone: "123456789",
-        balance: 100,
-        password: "password123",
-        walletType: 1,
-    };
+    it("should create a wallet", () => {
+        const result = Wallet.create({
+            balance: 1000,
+            cpf: "11290725500",
+            email: "test@gmail.com",
+            fullName: "Test",
+            password: "123456",
+            phone: "12345678901",
+            walletType: WalletType.COMMOM,
+        });
 
-    it("should create a wallet instance", () => {
-        const wallet = new Wallet(walletData);
-        expect(wallet).toBeInstanceOf(Wallet);
+        expect(result.isSuccess).toBe(true);
+        expect(result.value).toBeInstanceOf(Wallet);
+        expect(result.value.balance).toBe(1000);
+        expect(result.value.cpf).toBe("11290725500");
+        expect(result.value.email).toBe("test@gmail.com");
+        expect(result.value.fullName).toBe("Test");
+        expect(result.value.phone).toBe("12345678901");
+        expect(result.value.walletType).toBe(WalletType.COMMOM);
+        expect(result.value.createdAt).toBeInstanceOf(Date);
     });
 
-    it("should create a wallet instance with own id", () => {
-        const wallet = new Wallet(walletData, "ID_FAKE");
-        expect(wallet.id).toBe("ID_FAKE");
+    it("should not create a wallet with invalid cpf", () => {
+        const result = Wallet.create({
+            balance: 1000,
+            cpf: "1234567890",
+            email: "test@gmail.com",
+            fullName: "Test",
+            password: "123456",
+            phone: "12345678901",
+            walletType: WalletType.COMMOM,
+        });
+
+        expect(result.isFailure).toBe(true);
     });
 
-    it("should initialize wallet properties correctly", () => {
-        const wallet = new Wallet(walletData);
-        expect(wallet.fullName).toBe(walletData.fullName);
-        expect(wallet.cpf).toBe(walletData.cpf);
-        expect(wallet.email).toBe(walletData.email);
-        expect(wallet.phone).toBe(walletData.phone);
-        expect(wallet.balance).toBe(walletData.balance);
-        expect(wallet.password).toBe(walletData.password);
-        expect(wallet.walletType).toBe(walletData.walletType);
-        expect(wallet.createdAt).toBeInstanceOf(Date);
+    it("should not create a wallet with invalid phone", () => {
+        const result = Wallet.create({
+            balance: 1000,
+            cpf: "11290725500",
+            email: "test@gmail.com",
+            fullName: "Test",
+            password: "123456",
+            phone: "1234567890",
+            walletType: WalletType.COMMOM,
+        });
+
+        expect(result.isFailure).toBe(true);
+        expect(result.getErrorValue()).toBe("Invalid phone");
+    });
+
+    it("should not create a wallet with invalid balance", () => {
+        const result = Wallet.create({
+            balance: -1000,
+            cpf: "11290725500",
+            email: "test@gmail.com",
+            fullName: "Test",
+            password: "123456",
+            phone: "12345678901",
+            walletType: WalletType.COMMOM,
+        });
+
+        expect(result.isFailure).toBe(true);
+        expect(result.getErrorValue()).toBe("Invalid balance");
     });
 });

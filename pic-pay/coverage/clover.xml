@@ -1,101 +1,406 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1714264542737" clover="3.2.0">
-  <project timestamp="1714264542737" name="All files">
-    <metrics statements="63" coveredstatements="63" conditionals="11" coveredconditionals="11" methods="23" coveredmethods="23" elements="97" coveredelements="97" complexity="0" loc="63" ncloc="63" packages="5" files="6" classes="6"/>
-    <package name="domain.authorize">
-      <metrics statements="6" coveredstatements="6" conditionals="1" coveredconditionals="1" methods="2" coveredmethods="2"/>
+<coverage generated="1722716032114" clover="3.2.0">
+  <project timestamp="1722716032114" name="All files">
+    <metrics statements="326" coveredstatements="285" conditionals="112" coveredconditionals="109" methods="42" coveredmethods="39" elements="480" coveredelements="433" complexity="0" loc="326" ncloc="326" packages="8" files="17" classes="17"/>
+    <package name="src">
+      <metrics statements="4" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
+      <file name="index.ts" path="/home/arthurgustavo/projects/js-ts/pic-pay/src/index.ts">
+        <metrics statements="4" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="1" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="2" count="0" type="stmt"/>
+        <line num="3" count="0" type="stmt"/>
+        <line num="5" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.domain.authorize">
+      <metrics statements="11" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
       <file name="authorizer-service.ts" path="/home/arthurgustavo/projects/js-ts/pic-pay/src/domain/authorize/authorizer-service.ts">
-        <metrics statements="6" coveredstatements="6" conditionals="1" coveredconditionals="1" methods="2" coveredmethods="2"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="13" count="2" type="stmt"/>
-        <line num="17" count="2" type="stmt"/>
-        <line num="19" count="2" type="cond" truecount="1" falsecount="0"/>
-        <line num="21" count="1" type="stmt"/>
-        <line num="25" count="1" type="stmt"/>
+        <metrics statements="11" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="1" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
       </file>
     </package>
-    <package name="domain.transaction">
-      <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
+    <package name="src.domain.transaction">
+      <metrics statements="24" coveredstatements="0" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="1"/>
+      <file name="transaction-repository.ts" path="/home/arthurgustavo/projects/js-ts/pic-pay/src/domain/transaction/transaction-repository.ts">
+        <metrics statements="2" coveredstatements="0" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <line num="3" count="0" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+      </file>
       <file name="transaction.ts" path="/home/arthurgustavo/projects/js-ts/pic-pay/src/domain/transaction/transaction.ts">
-        <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
-        <line num="1" count="2" type="stmt"/>
-        <line num="13" count="2" type="stmt"/>
-        <line num="19" count="2" type="stmt"/>
-        <line num="21" count="2" type="stmt"/>
-        <line num="22" count="2" type="stmt"/>
-        <line num="23" count="2" type="stmt"/>
-        <line num="27" count="1" type="stmt"/>
-        <line num="31" count="1" type="stmt"/>
-        <line num="35" count="1" type="stmt"/>
-        <line num="39" count="2" type="stmt"/>
+        <metrics statements="22" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="1" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
       </file>
     </package>
-    <package name="domain.wallet">
-      <metrics statements="32" coveredstatements="32" conditionals="2" coveredconditionals="2" methods="13" coveredmethods="13"/>
-      <file name="wallet-service.ts" path="/home/arthurgustavo/projects/js-ts/pic-pay/src/domain/wallet/wallet-service.ts">
-        <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="2" count="1" type="stmt"/>
-        <line num="9" count="1" type="stmt"/>
-        <line num="13" count="2" type="stmt"/>
-        <line num="15" count="2" type="stmt"/>
-        <line num="17" count="2" type="stmt"/>
-        <line num="28" count="1" type="stmt"/>
-        <line num="30" count="1" type="stmt"/>
-        <line num="38" count="1" type="stmt"/>
+    <package name="src.domain.wallet">
+      <metrics statements="82" coveredstatements="80" conditionals="23" coveredconditionals="23" methods="12" coveredmethods="12"/>
+      <file name="wallet-repository.ts" path="/home/arthurgustavo/projects/js-ts/pic-pay/src/domain/wallet/wallet-repository.ts">
+        <metrics statements="2" coveredstatements="0" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <line num="4" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
       </file>
       <file name="wallet.ts" path="/home/arthurgustavo/projects/js-ts/pic-pay/src/domain/wallet/wallet.ts">
-        <metrics statements="23" coveredstatements="23" conditionals="2" coveredconditionals="2" methods="10" coveredmethods="10"/>
-        <line num="1" count="3" type="stmt"/>
-        <line num="15" count="3" type="cond" truecount="2" falsecount="0"/>
+        <metrics statements="80" coveredstatements="80" conditionals="22" coveredconditionals="22" methods="11" coveredmethods="11"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="17" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
+        <line num="43" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="44" count="32" type="stmt"/>
+        <line num="45" count="32" type="stmt"/>
+        <line num="46" count="32" type="stmt"/>
+        <line num="47" count="32" type="stmt"/>
+        <line num="48" count="32" type="stmt"/>
+        <line num="49" count="32" type="stmt"/>
+        <line num="50" count="32" type="stmt"/>
+        <line num="51" count="32" type="stmt"/>
+        <line num="52" count="32" type="stmt"/>
+        <line num="53" count="32" type="stmt"/>
+        <line num="54" count="32" type="stmt"/>
+        <line num="55" count="32" type="stmt"/>
+        <line num="57" count="32" type="stmt"/>
+        <line num="58" count="32" type="stmt"/>
+        <line num="59" count="32" type="stmt"/>
+        <line num="60" count="32" type="stmt"/>
+        <line num="61" count="32" type="stmt"/>
+        <line num="62" count="32" type="stmt"/>
+        <line num="63" count="32" type="stmt"/>
+        <line num="64" count="32" type="stmt"/>
+        <line num="65" count="32" type="stmt"/>
+        <line num="67" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="68" count="43" type="stmt"/>
+        <line num="69" count="43" type="stmt"/>
+        <line num="70" count="43" type="stmt"/>
+        <line num="72" count="43" type="cond" truecount="1" falsecount="0"/>
+        <line num="73" count="3" type="stmt"/>
+        <line num="74" count="3" type="cond" truecount="1" falsecount="0"/>
+        <line num="76" count="43" type="cond" truecount="1" falsecount="0"/>
+        <line num="77" count="5" type="stmt"/>
+        <line num="78" count="5" type="cond" truecount="1" falsecount="0"/>
+        <line num="80" count="43" type="cond" truecount="2" falsecount="0"/>
+        <line num="81" count="3" type="stmt"/>
+        <line num="82" count="3" type="cond" truecount="1" falsecount="0"/>
+        <line num="84" count="32" type="stmt"/>
+        <line num="85" count="43" type="stmt"/>
+        <line num="87" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="88" count="6" type="stmt"/>
+        <line num="89" count="6" type="stmt"/>
+        <line num="90" count="6" type="stmt"/>
+        <line num="91" count="6" type="stmt"/>
+        <line num="93" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="94" count="4" type="stmt"/>
+        <line num="95" count="4" type="cond" truecount="1" falsecount="0"/>
+        <line num="97" count="2" type="stmt"/>
+        <line num="98" count="6" type="stmt"/>
+        <line num="100" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="101" count="28" type="stmt"/>
+        <line num="102" count="28" type="stmt"/>
+        <line num="104" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="105" count="34" type="stmt"/>
+        <line num="106" count="34" type="stmt"/>
+        <line num="108" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="109" count="29" type="stmt"/>
+        <line num="110" count="29" type="stmt"/>
+        <line num="112" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="113" count="29" type="stmt"/>
+        <line num="114" count="29" type="stmt"/>
+        <line num="116" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="117" count="27" type="stmt"/>
+        <line num="118" count="27" type="stmt"/>
+        <line num="120" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="121" count="31" type="stmt"/>
+        <line num="122" count="31" type="stmt"/>
+        <line num="124" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="125" count="28" type="stmt"/>
+        <line num="126" count="28" type="stmt"/>
+        <line num="128" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="129" count="1" type="stmt"/>
+        <line num="130" count="1" type="stmt"/>
+        <line num="131" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.domain.wallet.services">
+      <metrics statements="23" coveredstatements="23" conditionals="7" coveredconditionals="7" methods="4" coveredmethods="4"/>
+      <file name="create-wallet.ts" path="/home/arthurgustavo/projects/js-ts/pic-pay/src/domain/wallet/services/create-wallet.ts">
+        <metrics statements="12" coveredstatements="12" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="9" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="10" count="4" type="stmt"/>
+        <line num="12" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
         <line num="16" count="3" type="stmt"/>
-        <line num="17" count="3" type="stmt"/>
-        <line num="28" count="13" type="stmt"/>
-        <line num="42" count="13" type="stmt"/>
-        <line num="44" count="13" type="stmt"/>
-        <line num="45" count="13" type="stmt"/>
-        <line num="46" count="13" type="stmt"/>
-        <line num="47" count="13" type="stmt"/>
-        <line num="48" count="13" type="stmt"/>
-        <line num="49" count="13" type="stmt"/>
-        <line num="50" count="13" type="stmt"/>
-        <line num="51" count="13" type="stmt"/>
-        <line num="55" count="11" type="stmt"/>
-        <line num="59" count="9" type="stmt"/>
-        <line num="63" count="7" type="stmt"/>
-        <line num="67" count="5" type="stmt"/>
-        <line num="71" count="7" type="stmt"/>
-        <line num="75" count="9" type="stmt"/>
-        <line num="79" count="7" type="stmt"/>
-        <line num="83" count="1" type="stmt"/>
-        <line num="87" count="3" type="stmt"/>
+        <line num="17" count="4" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+      </file>
+      <file name="update-wallet.ts" path="/home/arthurgustavo/projects/js-ts/pic-pay/src/domain/wallet/services/update-wallet.ts">
+        <metrics statements="11" coveredstatements="11" conditionals="3" coveredconditionals="3" methods="2" coveredmethods="2"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="14" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="15" count="2" type="stmt"/>
+        <line num="17" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="22" count="2" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="shared">
-      <metrics statements="4" coveredstatements="4" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>
+    <package name="src.shared">
+      <metrics statements="48" coveredstatements="48" conditionals="18" coveredconditionals="18" methods="7" coveredmethods="7"/>
       <file name="entity.ts" path="/home/arthurgustavo/projects/js-ts/pic-pay/src/shared/entity.ts">
-        <metrics statements="4" coveredstatements="4" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>
-        <line num="1" count="5" type="stmt"/>
-        <line num="7" count="15" type="cond" truecount="4" falsecount="0"/>
-        <line num="11" count="32" type="stmt"/>
-        <line num="15" count="5" type="stmt"/>
+        <metrics statements="9" coveredstatements="9" conditionals="3" coveredconditionals="3" methods="2" coveredmethods="2"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="6" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="7" count="32" type="cond" truecount="1" falsecount="0"/>
+        <line num="8" count="32" type="stmt"/>
+        <line num="10" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="11" count="35" type="stmt"/>
+        <line num="12" count="35" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+      </file>
+      <file name="result.ts" path="/home/arthurgustavo/projects/js-ts/pic-pay/src/shared/result.ts">
+        <metrics statements="37" coveredstatements="37" conditionals="15" coveredconditionals="15" methods="5" coveredmethods="5"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="7" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="8" count="119" type="cond" truecount="2" falsecount="0"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="13" count="119" type="cond" truecount="2" falsecount="0"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="17" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="19" count="117" type="stmt"/>
+        <line num="20" count="117" type="stmt"/>
+        <line num="21" count="117" type="stmt"/>
+        <line num="22" count="117" type="stmt"/>
+        <line num="23" count="117" type="stmt"/>
+        <line num="24" count="119" type="stmt"/>
+        <line num="26" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="27" count="110" type="cond" truecount="1" falsecount="0"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="29" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="31" count="109" type="stmt"/>
+        <line num="32" count="110" type="stmt"/>
+        <line num="34" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="35" count="65" type="stmt"/>
+        <line num="36" count="65" type="stmt"/>
+        <line num="38" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="39" count="52" type="stmt"/>
+        <line num="40" count="52" type="stmt"/>
+        <line num="42" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="43" count="30" type="cond" truecount="2" falsecount="0"/>
+        <line num="44" count="1" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
+        <line num="47" count="29" type="stmt"/>
+        <line num="48" count="30" type="stmt"/>
+        <line num="49" count="1" type="stmt"/>
+      </file>
+      <file name="use-case.ts" path="/home/arthurgustavo/projects/js-ts/pic-pay/src/shared/use-case.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="types">
-      <metrics statements="11" coveredstatements="11" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>
+    <package name="src.types">
+      <metrics statements="0" coveredstatements="0" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
       <file name="index.ts" path="/home/arthurgustavo/projects/js-ts/pic-pay/src/types/index.ts">
-        <metrics statements="11" coveredstatements="11" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>
-        <line num="1" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="2" count="2" type="stmt"/>
-        <line num="3" count="2" type="stmt"/>
-        <line num="4" count="2" type="stmt"/>
-        <line num="7" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="8" count="2" type="stmt"/>
-        <line num="9" count="2" type="stmt"/>
-        <line num="10" count="2" type="stmt"/>
-        <line num="11" count="2" type="stmt"/>
-        <line num="12" count="2" type="stmt"/>
-        <line num="13" count="2" type="stmt"/>
+        <metrics statements="0" coveredstatements="0" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
+      </file>
+    </package>
+    <package name="src.utils">
+      <metrics statements="134" coveredstatements="134" conditionals="59" coveredconditionals="59" methods="14" coveredmethods="14"/>
+      <file name="index.ts" path="/home/arthurgustavo/projects/js-ts/pic-pay/src/utils/index.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="isValidBalance.ts" path="/home/arthurgustavo/projects/js-ts/pic-pay/src/utils/isValidBalance.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="2" count="43" type="stmt"/>
+        <line num="3" count="43" type="stmt"/>
+      </file>
+      <file name="isValidCpf.ts" path="/home/arthurgustavo/projects/js-ts/pic-pay/src/utils/isValidCpf.ts">
+        <metrics statements="24" coveredstatements="24" conditionals="15" coveredconditionals="15" methods="2" coveredmethods="2"/>
+        <line num="1" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="2" count="69" type="cond" truecount="2" falsecount="0"/>
+        <line num="4" count="66" type="stmt"/>
+        <line num="6" count="69" type="cond" truecount="2" falsecount="0"/>
+        <line num="8" count="58" type="stmt"/>
+        <line num="9" count="58" type="stmt"/>
+        <line num="10" count="58" type="stmt"/>
+        <line num="11" count="58" type="stmt"/>
+        <line num="12" count="58" type="stmt"/>
+        <line num="14" count="69" type="cond" truecount="2" falsecount="0"/>
+        <line num="16" count="48" type="cond" truecount="1" falsecount="0"/>
+        <line num="17" count="95" type="stmt"/>
+        <line num="18" count="95" type="cond" truecount="1" falsecount="0"/>
+        <line num="19" count="902" type="stmt"/>
+        <line num="20" count="902" type="stmt"/>
+        <line num="21" count="95" type="stmt"/>
+        <line num="22" count="95" type="cond" truecount="2" falsecount="0"/>
+        <line num="23" count="95" type="stmt"/>
+        <line num="25" count="48" type="stmt"/>
+        <line num="26" count="69" type="cond" truecount="2" falsecount="0"/>
+        <line num="28" count="47" type="stmt"/>
+        <line num="29" count="69" type="cond" truecount="2" falsecount="0"/>
+        <line num="31" count="46" type="stmt"/>
+        <line num="32" count="46" type="stmt"/>
+      </file>
+      <file name="isValidPhone.ts" path="/home/arthurgustavo/projects/js-ts/pic-pay/src/utils/isValidPhone.ts">
+        <metrics statements="8" coveredstatements="8" conditionals="5" coveredconditionals="5" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="2" count="39" type="stmt"/>
+        <line num="3" count="39" type="cond" truecount="2" falsecount="0"/>
+        <line num="4" count="38" type="stmt"/>
+        <line num="5" count="38" type="stmt"/>
+        <line num="6" count="38" type="cond" truecount="2" falsecount="0"/>
+        <line num="7" count="33" type="stmt"/>
+        <line num="8" count="33" type="stmt"/>
+      </file>
+      <file name="wallet-repository-mock.ts" path="/home/arthurgustavo/projects/js-ts/pic-pay/src/utils/wallet-repository-mock.ts">
+        <metrics statements="98" coveredstatements="98" conditionals="38" coveredconditionals="38" methods="10" coveredmethods="10"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="7" count="12" type="stmt"/>
+        <line num="8" count="12" type="stmt"/>
+        <line num="10" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="11" count="16" type="stmt"/>
+        <line num="12" count="16" type="stmt"/>
+        <line num="13" count="16" type="stmt"/>
+        <line num="14" count="16" type="stmt"/>
+        <line num="15" count="16" type="stmt"/>
+        <line num="16" count="16" type="stmt"/>
+        <line num="17" count="16" type="stmt"/>
+        <line num="18" count="16" type="stmt"/>
+        <line num="19" count="16" type="stmt"/>
+        <line num="20" count="16" type="stmt"/>
+        <line num="21" count="16" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="25" count="24" type="cond" truecount="1" falsecount="0"/>
+        <line num="26" count="24" type="stmt"/>
+        <line num="28" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="29" count="18" type="stmt"/>
+        <line num="31" count="18" type="cond" truecount="1" falsecount="0"/>
+        <line num="32" count="1" type="stmt"/>
+        <line num="33" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="35" count="17" type="stmt"/>
+        <line num="37" count="18" type="cond" truecount="1" falsecount="0"/>
+        <line num="38" count="3" type="stmt"/>
+        <line num="39" count="3" type="cond" truecount="1" falsecount="0"/>
+        <line num="41" count="14" type="stmt"/>
+        <line num="43" count="14" type="stmt"/>
+        <line num="45" count="14" type="stmt"/>
+        <line num="47" count="18" type="stmt"/>
+        <line num="49" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="50" count="7" type="stmt"/>
+        <line num="52" count="7" type="cond" truecount="1" falsecount="0"/>
+        <line num="53" count="1" type="stmt"/>
+        <line num="54" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="56" count="6" type="stmt"/>
+        <line num="58" count="6" type="stmt"/>
+        <line num="59" count="7" type="cond" truecount="1" falsecount="0"/>
+        <line num="60" count="7" type="cond" truecount="1" falsecount="0"/>
+        <line num="61" count="7" type="cond" truecount="1" falsecount="0"/>
+        <line num="62" count="7" type="cond" truecount="1" falsecount="0"/>
+        <line num="63" count="7" type="cond" truecount="1" falsecount="0"/>
+        <line num="64" count="7" type="cond" truecount="1" falsecount="0"/>
+        <line num="65" count="7" type="cond" truecount="1" falsecount="0"/>
+        <line num="66" count="7" type="stmt"/>
+        <line num="68" count="7" type="stmt"/>
+        <line num="70" count="7" type="cond" truecount="2" falsecount="0"/>
+        <line num="71" count="4" type="stmt"/>
+        <line num="72" count="4" type="cond" truecount="1" falsecount="0"/>
+        <line num="74" count="2" type="stmt"/>
+        <line num="76" count="2" type="stmt"/>
+        <line num="77" count="7" type="stmt"/>
+        <line num="79" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="80" count="2" type="stmt"/>
+        <line num="82" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="83" count="1" type="stmt"/>
+        <line num="84" count="1" type="stmt"/>
+        <line num="87" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="89" count="1" type="stmt"/>
+        <line num="91" count="1" type="stmt"/>
+        <line num="92" count="2" type="stmt"/>
+        <line num="94" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="95" count="11" type="cond" truecount="1" falsecount="0"/>
+        <line num="97" count="11" type="cond" truecount="1" falsecount="0"/>
+        <line num="98" count="3" type="stmt"/>
+        <line num="99" count="3" type="cond" truecount="1" falsecount="0"/>
+        <line num="101" count="8" type="stmt"/>
+        <line num="103" count="8" type="stmt"/>
+        <line num="105" count="11" type="stmt"/>
+        <line num="107" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="108" count="20" type="cond" truecount="1" falsecount="0"/>
+        <line num="110" count="20" type="cond" truecount="1" falsecount="0"/>
+        <line num="111" count="18" type="stmt"/>
+        <line num="112" count="18" type="cond" truecount="1" falsecount="0"/>
+        <line num="114" count="2" type="stmt"/>
+        <line num="116" count="2" type="stmt"/>
+        <line num="117" count="20" type="stmt"/>
+        <line num="119" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="120" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="122" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="123" count="1" type="stmt"/>
+        <line num="124" count="1" type="stmt"/>
+        <line num="126" count="1" type="stmt"/>
+        <line num="128" count="1" type="stmt"/>
+        <line num="129" count="2" type="stmt"/>
+        <line num="131" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="132" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="134" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="135" count="1" type="stmt"/>
+        <line num="136" count="1" type="stmt"/>
+        <line num="138" count="1" type="stmt"/>
+        <line num="140" count="1" type="stmt"/>
+        <line num="141" count="2" type="stmt"/>
+        <line num="143" count="1" type="stmt"/>
       </file>
     </package>
   </project>

@@ -1,161 +1,273 @@
-import { CreateWalletDto, Wallet, WalletType } from "./wallet";
+import { beforeEach, describe, expect, it } from "vitest";
+import { CreateWalletDto, UpdateWalletDto, WalletType } from "./wallet";
+import WalletRepositoryMock from "../../utils/wallet-repository-mock"
 import { WalletRepository } from "./wallet-repository";
 
-class WalletRepositoryMock implements WalletRepository {
-    private readonly wallets: Wallet[] = [];
-
-    async create(walletToCreate: CreateWalletDto): Promise<Wallet> {
-        const wallet = new Wallet(walletToCreate);
-
-        this.wallets.push(wallet);
-
-        return wallet;
-    }
-
-    async update(
-        updateFields: Partial<CreateWalletDto>,
-        id: string,
-    ): Promise<Wallet> {
-        const walletIndex = this.wallets.findIndex(
-            (wallet) => wallet.id === id,
-        );
-
-        const updatedWallet = {
-            ...this.wallets[walletIndex],
-            ...updateFields,
-        } as Wallet;
-
-        const wallet = new Wallet(updatedWallet, id);
-
-        this.wallets[walletIndex] = wallet;
-
-        return wallet;
-    }
-
-    async findById(id: string): Promise<Wallet | null> {
-        const wallet = this.wallets.find((wallet) => wallet.id === id);
-
-        return wallet ?? null;
-    }
-
-    async findByCpf(cpf: string): Promise<Wallet | null> {
-        const wallet = this.wallets.find((wallet) => wallet.cpf === cpf);
-
-        return wallet ?? null;
-    }
-
-    async findByEmail(email: string): Promise<Wallet | null> {
-        const wallet = this.wallets.find((wallet) => wallet.email === email);
-
-        return wallet ?? null;
-    }
-
-    async findByPhone(phone: string): Promise<Wallet | null> {
-        const wallet = this.wallets.find((wallet) => wallet.phone === phone);
-
-        return wallet ?? null;
-    }
-
-    async delete(id: string): Promise<void> {
-        const walletToDelete = await this.findById(id);
-
-        if (!walletToDelete) return;
-
-        const index = this.wallets.indexOf(walletToDelete);
-
-        if (index === -1) return;
-
-        this.wallets.splice(index, 1);
-    }
-}
-
 describe("WalletRepository", () => {
-    const walletData = {
-        fullName: "John Doe",
-        cpf: "12345678900",
-        email: "john@example.com",
-        phone: "123456789",
-        balance: 100,
-        password: "password123",
+    let walletRepository: WalletRepository;
+
+    const walletData: CreateWalletDto = {
+        balance: 1000,
+        cpf: "11290725500",
+        email: "test@gmail.com",
+        fullName: "Test",
+        password: "123456",
+        phone: "12345678901",
         walletType: WalletType.COMMOM,
     };
 
-    const walletRepository = new WalletRepositoryMock();
+    beforeEach(() => {
+        walletRepository = new WalletRepositoryMock();
+    })
 
     it("should be able to create and return a wallet using wallet repository", async () => {
-        const wallet = await walletRepository.create(walletData);
+        const result = await walletRepository.create(walletData);
+        const wallet = result.value;
 
+        expect(result.isSuccess).toBe(true);
         expect(wallet).toBeDefined();
         expect(wallet.id).toBeDefined();
-        expect(wallet.fullName).toBe(wallet.fullName);
-        expect(wallet.cpf).toBe(wallet.cpf);
-        expect(wallet.balance).toBe(wallet.balance);
-        expect(wallet.walletType).toBe(wallet.walletType);
-        expect(wallet.phone).toBe(wallet.phone);
-        expect(wallet.password).toBe(wallet.password);
+        expect(wallet.fullName).toBe(walletData.fullName);
+        expect(wallet.cpf).toBe(walletData.cpf);
+        expect(wallet.email).toBe(walletData.email);
+        expect(wallet.phone).toBe(walletData.phone);
+        expect(wallet.balance).toBe(walletData.balance);
+        expect(wallet.password).toBe(walletData.password);
+        expect(wallet.walletType).toBe(walletData.walletType);
     });
 
-    it("should be able to update and return a updated wallet", async () => {
-        const wallet = await walletRepository.create(walletData);
+    it("should be able to update a wallet using wallet repository", async () => {
+        const result = await walletRepository.create(walletData);
+        const wallet = result.value;
 
-        const updatedWallet = await walletRepository.update(
-            {
-                fullName: "Jane Doe",
-            },
-            wallet.id,
-        );
-
-        expect(updatedWallet.id).toBe(wallet.id);
-        expect(updatedWallet.fullName).toBe("Jane Doe");
-    });
-
-    it("should be able to find by id and return wallet", async () => {
-        const walletMock = await walletRepository.create(walletData);
-
-        const wallet = await walletRepository.findById(walletMock.id);
-
-        expect(wallet?.id).toBe(walletMock.id);
-        expect(wallet?.fullName).toBe(walletMock.fullName);
-    });
-
-    it("should be able to find by cpf and return wallet", async () => {
-        const wallet = await walletRepository.findByCpf(walletData.cpf);
-
-        expect(wallet?.id).toBeTruthy();
-        expect(wallet?.cpf).toBe(walletData.cpf);
-    });
-
-    it("should be able to find by email and return wallet", async () => {
-        const wallet = await walletRepository.findByEmail(walletData.email);
-
-        expect(wallet?.id).toBeTruthy();
-        expect(wallet?.email).toBe(walletData.email);
-    });
-
-    it("should be able to find by phone and return wallet", async () => {
-        const wallet = await walletRepository.findByPhone(walletData.phone);
-
-        expect(wallet?.id).toBeTruthy();
-        expect(wallet?.phone).toBe(walletData.phone);
-    });
-
-    it("should be able to delete a wallet", async () => {
-        const mock = {
-            fullName: "Jane Doe",
-            email: "janedoe@gmail.com",
-            balance: 32430,
-            cpf: "13i92414",
-            password: "arhur",
-            phone: "73204248914",
-            walletType: 2,
+        const updatedWalletData: UpdateWalletDto = {
+            balance: 2000,
+            fullName: "Updated Test",
+            cpf: "21070432059",
+            email: "test2@gmail.com",
+            password: "654321",
+            phone: "98765432101",
+            walletType: WalletType.SHOPKEEPER,
         };
 
-        const walletToDelete = await walletRepository.create(mock);
+        const updatedResult = await walletRepository.update(updatedWalletData, wallet.id);
 
-        await walletRepository.delete(walletToDelete.id);
+        expect(updatedResult.isSuccess).toBe(true);
+        expect(updatedResult.value).toBeDefined();
+        expect(updatedResult.value.id).toBe(wallet.id);
+        expect(updatedResult.value.fullName).toBe(updatedWalletData.fullName);
+        expect(updatedResult.value.cpf).toBe(updatedWalletData.cpf);
+        expect(updatedResult.value.email).toBe(updatedWalletData.email);
+        expect(updatedResult.value.phone).toBe(updatedWalletData.phone);
+        expect(updatedResult.value.balance).toBe(updatedWalletData.balance);
+        expect(updatedResult.value.password).toBe(updatedWalletData.password);
+        expect(updatedResult.value.walletType).toBe(updatedWalletData.walletType);
+    });
 
-        const result = await walletRepository.findById(walletToDelete.id);
+    it("should be able to delete a wallet using wallet repository", async () => {
+        const result = await walletRepository.create(walletData);
+        const wallet = result.value;
 
-        expect(result).toBe(null);
+        const deleteResult = await walletRepository.delete(wallet.id);
+
+        expect(deleteResult.isSuccess).toBe(true);
+    });
+
+    it("should be able to find a wallet by id using wallet repository", async () => {
+        const result = await walletRepository.create(walletData);
+        const wallet = result.value;
+
+        const findResult = await walletRepository.findById(wallet.id);
+
+        expect(findResult.isSuccess).toBe(true);
+        expect(findResult.value).toBeDefined();
+        expect(findResult.value.id).toBe(wallet.id);
+    });
+
+    it("should be able to find a wallet by cpf using wallet repository", async () => {
+        const result = await walletRepository.create(walletData);
+        const wallet = result.value;
+
+        const findResult = await walletRepository.findByCpf(wallet.cpf);
+
+        expect(findResult.isSuccess).toBe(true);
+        expect(findResult.value).toBeDefined();
+        expect(findResult.value.id).toBe(wallet.id);
+    });
+
+    it("should be able to find a wallet by email using wallet repository", async () => {
+        const result = await walletRepository.create(walletData);
+        const wallet = result.value;
+
+        const findResult = await walletRepository.findByEmail(wallet.email);
+
+        expect(findResult.isSuccess).toBe(true);
+        expect(findResult.value).toBeDefined();
+        expect(findResult.value.id).toBe(wallet.id);
+    });
+
+    it("should be able to find a wallet by phone using wallet repository", async () => {
+        const result = await walletRepository.create(walletData);
+        const wallet = result.value;
+
+        const findResult = await walletRepository.findByPhone(wallet.phone);
+
+        expect(findResult.isSuccess).toBe(true);
+        expect(findResult.value).toBeDefined();
+        expect(findResult.value.id).toBe(wallet.id);
+    });
+
+    it("should return a failure when trying to create a wallet if cpf already exists using wallet repository", async () => {
+        await walletRepository.create(walletData);
+
+        const repeatedResult = await walletRepository.create(walletData);
+
+        expect(repeatedResult.isFailure).toBe(true);
+        expect(repeatedResult.getErrorValue()).toBe("Wallet already exists");
+    });
+
+    it("should return a failure when trying to create a wallet with invalid balance using wallet repository", async () => {
+        const invalidWalletData: CreateWalletDto = {
+            balance: -1000,
+            cpf: "11290725500",
+            email: "test@gmail.com",
+            fullName: "Test",
+            password: "123456",
+            phone: "12345678901",
+            walletType: WalletType.COMMOM,
+        };
+
+        const result = await walletRepository.create(invalidWalletData);
+
+        expect(result.isFailure).toBe(true);
+        expect(result.getErrorValue()).toBe("Invalid balance");
+    });
+
+    it("should return a failure when trying to create a wallet with invalid phone using wallet repository", async () => {
+        const invalidWalletData: CreateWalletDto = {
+            balance: 1000,
+            cpf: "11290725500",
+            email: "test@gmail.com",
+            fullName: "Test",
+            password: "123456",
+            phone: "0",
+            walletType: WalletType.COMMOM,
+        };
+
+        const result = await walletRepository.create(invalidWalletData);
+
+        expect(result.isFailure).toBe(true);
+        expect(result.getErrorValue()).toBe("Invalid phone");
+    });
+
+    it("should return a failure when trying to create a wallet with invalid cpf using wallet repository", async () => {
+        const invalidWalletData: CreateWalletDto = {
+            balance: 1000,
+            cpf: "0",
+            email: "test@gmail.com",
+            fullName: "Test",
+            password: "123456",
+            phone: "12345678901",
+            walletType: WalletType.COMMOM,
+        };
+
+        const result = await walletRepository.create(invalidWalletData);
+
+        expect(result.isFailure).toBe(true);
+        expect(result.getErrorValue()).toBe("Invalid CPF");
+    });
+
+    it("should return a failure when wallet is not found by id using wallet repository", async () => {
+        const findResult = await walletRepository.findById("invalid-id");
+
+        expect(findResult.isFailure).toBe(true);
+        expect(findResult.getErrorValue()).toBe("Wallet not found");
+    });
+
+    it("should return a failure when wallet is not found by cpf using wallet repository", async () => {
+        const findResult = await walletRepository.findByCpf("invalid-cpf");
+
+        expect(findResult.isFailure).toBe(true);
+        expect(findResult.getErrorValue()).toBe("Wallet not found");
+    });
+
+    it("should return a failure when wallet is not found by email using wallet repository", async () => {
+        const findResult = await walletRepository.findByEmail("invalid-email");
+
+        expect(findResult.isFailure).toBe(true);
+        expect(findResult.getErrorValue()).toBe("Wallet not found");
+    });
+
+    it("should return a failure when wallet is not found by phone using wallet repository", async () => {
+        const findResult = await walletRepository.findByPhone("invalid-phone");
+
+        expect(findResult.isFailure).toBe(true);
+        expect(findResult.getErrorValue()).toBe("Wallet not found");
+    });
+
+    it("should return a failure when trying to delete a wallet that does not exist using wallet repository", async () => {
+        const deleteResult = await walletRepository.delete("invalid-id");
+
+        expect(deleteResult.isFailure).toBe(true);
+        expect(deleteResult.getErrorValue()).toBe("Wallet not found");
+    });
+
+    it("should return a failure when trying to update a wallet that does not exist using wallet repository", async () => {
+        const updatedWalletData: UpdateWalletDto = {
+            balance: 2000,
+            fullName: "Updated Test",
+            cpf: "11290725501",
+            email: "test@gmail.com",
+            password: "654321",
+            phone: "98765432101",
+            walletType: WalletType.SHOPKEEPER,
+        };
+
+        const updatedResult = await walletRepository.update(updatedWalletData, "invalid-id");
+
+        expect(updatedResult.isFailure).toBe(true);
+        expect(updatedResult.getErrorValue()).toBe("Wallet not found");
+    });
+
+    it("should return a failure when trying to update a wallet with invalid phone using wallet repository", async () => {
+        const result = await walletRepository.create(walletData);
+        const wallet = result.value;
+
+        const updatedWalletData: UpdateWalletDto = {
+            phone: "0",
+        };
+
+        const updatedResult = await walletRepository.update(updatedWalletData, wallet.id);
+
+        expect(updatedResult.isFailure).toBe(true);
+        expect(updatedResult.getErrorValue()).toBe("Invalid phone");
+    });
+
+    it("should return a failure when trying to update a wallet with invalid cpf using wallet repository", async () => {
+        const result = await walletRepository.create(walletData);
+        const wallet = result.value;
+
+        const updatedWalletData: UpdateWalletDto = {
+            cpf: "0",
+        };
+
+        const updatedResult = await walletRepository.update(updatedWalletData, wallet.id);
+
+        expect(updatedResult.isFailure).toBe(true);
+        expect(updatedResult.getErrorValue()).toBe("Invalid CPF");
+    });
+
+    it("should return a failure when trying to update a wallet with invalid balance using wallet repository", async () => {
+        const result = await walletRepository.create(walletData);
+        const wallet = result.value;
+
+        const updatedWalletData: UpdateWalletDto = {
+            balance: -1000,
+        };
+
+        const updatedResult = await walletRepository.update(updatedWalletData, wallet.id);
+
+        expect(updatedResult.isFailure).toBe(true);
+        expect(updatedResult.getErrorValue()).toBe("Invalid balance");
     });
 });

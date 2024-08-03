@@ -1,13 +1,12 @@
-import { CreateWalletDto, UpdateWalletDto, Wallet } from "./wallet";
+import Result from "../../shared/result";
+import Wallet, { CreateWalletDto, UpdateWalletDto } from "./wallet";
 
-abstract class WalletRepository {
-    abstract create(fields: CreateWalletDto): Promise<Wallet>;
-    abstract update(updateFields: UpdateWalletDto, id: string): Promise<Wallet>;
-    abstract delete(id: string): Promise<void>;
-    abstract findById(id: string): Promise<Wallet | null>;
-    abstract findByCpf(cpf: string): Promise<Wallet | null>;
-    abstract findByEmail(email: string): Promise<Wallet | null>;
-    abstract findByPhone(phone: string): Promise<Wallet | null>;
+export abstract class WalletRepository {
+    abstract create(fields: CreateWalletDto): Promise<Result<Wallet>>;
+    abstract update(updateFields: UpdateWalletDto, id: string): Promise<Result<Wallet>>;
+    abstract delete(id: string): Promise<Result<void>>;
+    abstract findById(id: string): Promise<Result<Wallet>>;
+    abstract findByCpf(cpf: string): Promise<Result<Wallet>>;
+    abstract findByEmail(email: string): Promise<Result<Wallet>>;
+    abstract findByPhone(phone: string): Promise<Result<Wallet>>;
 }
-
-export { WalletRepository };

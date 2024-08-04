@@ -1,8 +1,8 @@
 import CreateWallet from "./create-wallet";
-import Wallet, { WalletType } from "../wallet";
+import Wallet, { WALLET_TYPE } from "../wallet";
 import { describe, beforeEach, it, expect } from "vitest";
 import { WalletRepository } from "../wallet-repository";
-import WalletRepositoryMock from "../../../utils/wallet-repository-mock";
+import { WalletRepositoryMock } from "../../../utils";
 
 describe("CreateWallet", () => {
     let createWallet: CreateWallet;
@@ -18,10 +18,10 @@ describe("CreateWallet", () => {
             balance: 1000,
             cpf: "11290725500",
             email: "test@gmail.com",
-            fullName: "Test",
+            name: "Test",
             password: "123456",
             phone: "11999999999",
-            walletType: WalletType.SHOPKEEPER,
+            walletType: WALLET_TYPE.SHOPKEEPER,
         });
 
         expect(result.isSuccess).toBe(true);
@@ -29,10 +29,10 @@ describe("CreateWallet", () => {
         expect(result.value.balance).toBe(1000);
         expect(result.value.cpf).toBe("11290725500");
         expect(result.value.email).toBe("test@gmail.com");
-        expect(result.value.fullName).toBe("Test");
+        expect(result.value.name).toBe("Test");
         expect(result.value.password).toBe("123456");
         expect(result.value.phone).toBe("11999999999");
-        expect(result.value.walletType).toBe(WalletType.SHOPKEEPER);
+        expect(result.value.walletType).toBe(WALLET_TYPE.SHOPKEEPER);
     });
 
     it("should return an error when wallet creation fails", async () => {
@@ -40,10 +40,10 @@ describe("CreateWallet", () => {
             balance: -1000,
             cpf: "11290725500",
             email: "test@gmail.com",
-            fullName: "Test",
+            name: "Test",
             password: "123456",
             phone: "11999999999",
-            walletType: WalletType.SHOPKEEPER,
+            walletType: WALLET_TYPE.SHOPKEEPER,
         });
 
         expect(result.isFailure).toBe(true);

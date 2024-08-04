@@ -10,7 +10,7 @@ export class WalletRepositoryMockMapper {
     static toPersistence(wallet: Wallet) {
         return {
             id: wallet.id,
-            fullName: wallet.fullName,
+            name: wallet.name,
             cpf: wallet.cpf,
             email: wallet.email,
             phone: wallet.phone,
@@ -22,17 +22,17 @@ export class WalletRepositoryMockMapper {
 }
 
 
-export default class WalletRepositoryMock implements WalletRepository {
+export class WalletRepositoryMock implements WalletRepository {
     private readonly wallets: WalletProps[] = [];
 
-    async create(walletToCreate: CreateWalletDto): Promise<Result<Wallet>> {
+    async create(walletToCreate: CreateWalletDto, id?: string): Promise<Result<Wallet>> {
         const walletExists = await this.findByCpf(walletToCreate.cpf);
 
         if (walletExists.isSuccess) {
             return Result.fail("Wallet already exists");
         }
 
-        const result = Wallet.create(walletToCreate);
+        const result = Wallet.create(walletToCreate, id);
 
         if (result.isFailure) {
             return Result.fail(result.getErrorValue());
@@ -59,13 +59,13 @@ export default class WalletRepositoryMock implements WalletRepository {
             balance: updateFields.balance ?? wallet.balance,
             cpf: updateFields.cpf ?? wallet.cpf,
             email: updateFields.email ?? wallet.email,
-            fullName: updateFields.fullName ?? wallet.fullName,
+            name: updateFields.name ?? wallet.name,
             password: updateFields.password ?? wallet.password,
             phone: updateFields.phone ?? wallet.phone,
             walletType: updateFields.walletType ?? wallet.walletType,
         };
 
-        const result = Wallet.update(updatedWallet, id);
+        const result = wallet.update(updatedWallet);
 
         if (result.isFailure) {
             return Result.fail(result.getErrorValue());

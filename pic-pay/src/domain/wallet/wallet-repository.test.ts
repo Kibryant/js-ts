@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from "vitest";
-import { CreateWalletDto, UpdateWalletDto, WalletType } from "./wallet";
-import WalletRepositoryMock from "../../utils/wallet-repository-mock"
+import { CreateWalletDto, UpdateWalletDto, WALLET_TYPE } from "./wallet";
+import { WalletRepositoryMock } from "../../utils"
 import { WalletRepository } from "./wallet-repository";
 
 describe("WalletRepository", () => {
@@ -10,10 +10,10 @@ describe("WalletRepository", () => {
         balance: 1000,
         cpf: "11290725500",
         email: "test@gmail.com",
-        fullName: "Test",
+        name: "Test",
         password: "123456",
         phone: "12345678901",
-        walletType: WalletType.COMMOM,
+        walletType: WALLET_TYPE.COMMOM,
     };
 
     beforeEach(() => {
@@ -27,7 +27,23 @@ describe("WalletRepository", () => {
         expect(result.isSuccess).toBe(true);
         expect(wallet).toBeDefined();
         expect(wallet.id).toBeDefined();
-        expect(wallet.fullName).toBe(walletData.fullName);
+        expect(wallet.name).toBe(walletData.name);
+        expect(wallet.cpf).toBe(walletData.cpf);
+        expect(wallet.email).toBe(walletData.email);
+        expect(wallet.phone).toBe(walletData.phone);
+        expect(wallet.balance).toBe(walletData.balance);
+        expect(wallet.password).toBe(walletData.password);
+        expect(wallet.walletType).toBe(walletData.walletType);
+    });
+
+    it("should be able to create with my own id and return a wallet using wallet repository", async () => {
+        const result = await walletRepository.create(walletData, "my-own-id");
+        const wallet = result.value;
+
+        expect(result.isSuccess).toBe(true);
+        expect(wallet).toBeDefined();
+        expect(wallet.id).toBe("my-own-id");
+        expect(wallet.name).toBe(walletData.name);
         expect(wallet.cpf).toBe(walletData.cpf);
         expect(wallet.email).toBe(walletData.email);
         expect(wallet.phone).toBe(walletData.phone);
@@ -42,12 +58,12 @@ describe("WalletRepository", () => {
 
         const updatedWalletData: UpdateWalletDto = {
             balance: 2000,
-            fullName: "Updated Test",
+            name: "Updated Test",
             cpf: "21070432059",
             email: "test2@gmail.com",
             password: "654321",
             phone: "98765432101",
-            walletType: WalletType.SHOPKEEPER,
+            walletType: WALLET_TYPE.SHOPKEEPER,
         };
 
         const updatedResult = await walletRepository.update(updatedWalletData, wallet.id);
@@ -55,7 +71,7 @@ describe("WalletRepository", () => {
         expect(updatedResult.isSuccess).toBe(true);
         expect(updatedResult.value).toBeDefined();
         expect(updatedResult.value.id).toBe(wallet.id);
-        expect(updatedResult.value.fullName).toBe(updatedWalletData.fullName);
+        expect(updatedResult.value.name).toBe(updatedWalletData.name);
         expect(updatedResult.value.cpf).toBe(updatedWalletData.cpf);
         expect(updatedResult.value.email).toBe(updatedWalletData.email);
         expect(updatedResult.value.phone).toBe(updatedWalletData.phone);
@@ -131,10 +147,10 @@ describe("WalletRepository", () => {
             balance: -1000,
             cpf: "11290725500",
             email: "test@gmail.com",
-            fullName: "Test",
+            name: "Test",
             password: "123456",
             phone: "12345678901",
-            walletType: WalletType.COMMOM,
+            walletType: WALLET_TYPE.COMMOM,
         };
 
         const result = await walletRepository.create(invalidWalletData);
@@ -148,10 +164,10 @@ describe("WalletRepository", () => {
             balance: 1000,
             cpf: "11290725500",
             email: "test@gmail.com",
-            fullName: "Test",
+            name: "Test",
             password: "123456",
             phone: "0",
-            walletType: WalletType.COMMOM,
+            walletType: WALLET_TYPE.COMMOM,
         };
 
         const result = await walletRepository.create(invalidWalletData);
@@ -165,10 +181,10 @@ describe("WalletRepository", () => {
             balance: 1000,
             cpf: "0",
             email: "test@gmail.com",
-            fullName: "Test",
+            name: "Test",
             password: "123456",
             phone: "12345678901",
-            walletType: WalletType.COMMOM,
+            walletType: WALLET_TYPE.COMMOM,
         };
 
         const result = await walletRepository.create(invalidWalletData);
@@ -215,12 +231,12 @@ describe("WalletRepository", () => {
     it("should return a failure when trying to update a wallet that does not exist using wallet repository", async () => {
         const updatedWalletData: UpdateWalletDto = {
             balance: 2000,
-            fullName: "Updated Test",
+            name: "Updated Test",
             cpf: "11290725501",
             email: "test@gmail.com",
             password: "654321",
             phone: "98765432101",
-            walletType: WalletType.SHOPKEEPER,
+            walletType: WALLET_TYPE.SHOPKEEPER,
         };
 
         const updatedResult = await walletRepository.update(updatedWalletData, "invalid-id");

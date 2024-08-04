@@ -3,37 +3,46 @@ import Result from "../../shared/result";
 import { isValidCpf, isValidBalance, isValidPhone } from "../../utils";
 
 export interface CreateWalletDto {
-    fullName: string;
+    name: string;
     cpf: string;
     email: string;
     phone: string;
     balance: number;
     password: string;
-    walletType: WalletType;
+    walletType: WALLET_TYPE;
 }
 
-export type UpdateWalletDto = Partial<CreateWalletDto>;
+export interface UpdateWalletDto {
+    name?: string;
+    cpf?: string;
+    email?: string;
+    phone?: string;
+    balance?: number;
+    password?: string;
+    walletType?: WALLET_TYPE;
+}
 
-export enum WalletType {
+
+export enum WALLET_TYPE {
     COMMOM = 1,
     SHOPKEEPER = 2,
 }
 
 export interface WalletProps {
     id: string;
-    fullName: string;
+    name: string;
     cpf: string;
     email: string;
     phone: string;
     balance: number;
     password: string;
-    walletType: WalletType;
+    walletType: WALLET_TYPE;
 }
 
 export default class Wallet extends Entity {
-    protected _fullName: string;
+    protected _name: string;
     protected _cpf: string;
-    protected _walletType: WalletType;
+    protected _walletType: WALLET_TYPE;
     protected _email: string;
     protected _phone: string;
     protected _balance: number;
@@ -42,7 +51,7 @@ export default class Wallet extends Entity {
 
     private constructor(
         {
-            fullName,
+            name,
             cpf,
             balance,
             email,
@@ -55,11 +64,10 @@ export default class Wallet extends Entity {
         super(id);
 
         this._balance = balance;
-        this._fullName = fullName;
+        this._name = name;
         this._cpf = cpf;
         this._email = email;
         this._phone = phone;
-        this._password = password;
         this._password = password;
         this._walletType = walletType;
     }
@@ -84,21 +92,8 @@ export default class Wallet extends Entity {
         return Result.ok(new Wallet(fields, id))
     }
 
-    static update(
-        fields: UpdateWalletDto,
-        id: string,
-    ): Result<Wallet> {
-        const result = Wallet.create(fields as CreateWalletDto, id);
-
-        if (result.isFailure) {
-            return Result.fail(result.getErrorValue());
-        }
-
-        return result;
-    }
-
-    get fullName() {
-        return this._fullName;
+    get name() {
+        return this._name;
     }
 
     get cpf() {
@@ -127,6 +122,70 @@ export default class Wallet extends Entity {
 
     get createdAt() {
         return this._createdAt;
+    }
+
+    update(fields: UpdateWalletDto): Result<Wallet> {
+        if (fields.cpf && !isValidCpf(fields.cpf)) {
+            return Result.fail('Invalid CPF');
+        }
+
+        if (fields.balance && !isValidBalance(fields.balance)) {
+            return Result.fail('Invalid balance');
+        }
+
+        if (fields.phone && !isValidPhone(fields.phone)) {
+            return Result.fail('Invalid phone');
+        }
+
+        if (fields.name) {
+            this._name = fields.name;
+        }
+
+        if (fields.cpf) {
+            this._cpf = fields.cpf;
+        }
+
+        if (fields.email) {
+            this._email = fields.email;
+        }
+
+        if (fields.phone) {
+            this._phone = fields.phone;
+        }
+
+        if (fields.balance !== undefined) {
+            this._balance = fields.balance;
+        }
+
+        if (fields.password) {
+            this._password = fields.password;
+        }
+
+        if (fields.walletType !== undefined) {
+            this._walletType = fields.walletType;
+        }
+
+        return Result.ok(this);
+    }
+
+    credit(amount: number): Result<void> {
+        if(amount <= 0) {
+            return Result.fail('Invalid amount');
+        }
+
+        this._balance += amount;
+
+        return Result.ok();
+    }
+
+    debit(amount: number): Result<void> {
+        if(amount > this._balance) {
+            return Result.fail('Insufficient funds');
+        }
+
+        this._balance -= amount;
+
+        return Result.ok();
     }
 }
 

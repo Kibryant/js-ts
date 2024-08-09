@@ -13,20 +13,18 @@ export default class CreateTransaction implements UseCase<CreateTransactionDto, 
     ) { }
 
     private async approveTransaction(transactionId: string): Promise<Result<Transaction>> {
-        const transactionToApprovedOrError = await this.transactionRepository.findById(transactionId)
-
+        const transactionToApprovedOrError = await this.transactionRepository.findById(transactionId);
 
         if (transactionToApprovedOrError.isFailure) {
             return Result.fail("Transaction not found");
         }
 
         const transactionToApproved = transactionToApprovedOrError.value;
-
         transactionToApproved.approve();
 
-        const transaction = await this.transactionRepository.update({ status: transactionToApproved.status }, transactionId);
-
-        console.log(transaction);
+        const transaction = await this.transactionRepository.update({
+            status: transactionToApproved.status,
+        }, transactionId);
 
         if (transaction.isFailure) {
             return Result.fail(transaction.getErrorValue());
@@ -36,13 +34,15 @@ export default class CreateTransaction implements UseCase<CreateTransactionDto, 
     }
 
     private async rejectTransaction(transactionId: string): Promise<Result<Transaction>> {
-        const transactionToReject = (await this.transactionRepository.findById(transactionId)).value;
+        const transactionToRejectOrError = await this.transactionRepository.findById(transactionId);
 
-        if (!transactionToReject) {
+        if (transactionToRejectOrError.isFailure) {
             return Result.fail("Transaction not found");
         }
 
+        const transactionToReject = transactionToRejectOrError.value;
         transactionToReject.reject();
+
         const transaction = await this.transactionRepository.update(transactionToReject, transactionToReject.id);
 
         if (transaction.isFailure) {
@@ -53,70 +53,59 @@ export default class CreateTransaction implements UseCase<CreateTransactionDto, 
     }
 
     async execute(transactionData: CreateTransactionDto): Promise<Result<Transaction>> {
-        const payerExists = await this.walletRepository.findById(transactionData.payerId);
-
-        const amount = transactionData.amount;
-
-        if (payerExists.isFailure) {
+        const payerResult = await this.walletRepository.findById(transactionData.payerId);
+        if (payerResult.isFailure) {
             return Result.fail("Payer not found");
         }
+        const payer = payerResult.value;
 
-        const payer = payerExists.value;
-
-        const payeeExists = await this.walletRepository.findById(transactionData.payeeId);
-
-        if (payeeExists.isFailure) {
+        const payeeResult = await this.walletRepository.findById(transactionData.payeeId);
+        if (payeeResult.isFailure) {
             return Result.fail("Payee not found");
         }
+        const payee = payeeResult.value;
 
-        const payerIsShopkeeper = isShopkeeper(payer.walletType);
-
-        if (payerIsShopkeeper) {
+        if (isShopkeeper(payer.walletType)) {
             return Result.fail("Shopkeeper can't make transactions");
         }
 
-        if (!haveSufficientFunds(payer.balance, amount)) {
+        if (!haveSufficientFunds(payer.balance, transactionData.amount)) {
             return Result.fail("Insufficient funds");
         }
 
-        const result = await this.transactionRepository.create(transactionData);
-
-        if (result.isFailure) {
-            return Result.fail(result.getErrorValue());
+        const transactionResult = await this.transactionRepository.create(transactionData);
+        if (transactionResult.isFailure) {
+            return Result.fail(transactionResult.getErrorValue());
         }
 
-        const transactionInProgess = result.value;
+        const transactionInProgress = transactionResult.value;
 
-        payer.debit(amount);
+        const transactionInProgressIsReadyToProcess = transactionInProgress.isReadyToProcess();
 
-        const userUpdatedOrError = await this.walletRepository.update(payer, payer.id);
-
-        if (userUpdatedOrError.isFailure) {
-            await this.rejectTransaction(transactionInProgess.id);
-            return Result.fail(userUpdatedOrError.getErrorValue());
+        if (!transactionInProgressIsReadyToProcess) {
+            return Result.ok(transactionInProgress);
         }
 
-        const payee = payeeExists.value;
-
-        payee.credit(amount);
-
-        const payeeUpdatedOrError = await this.walletRepository.update(payee, payee.id);
-
-        if (payeeUpdatedOrError.isFailure) {
-            await this.rejectTransaction(transactionInProgess.id);
-            return Result.fail(payeeUpdatedOrError.getErrorValue());
+        payer.debit(transactionData.amount);
+        const payerUpdateResult = await this.walletRepository.update(payer, payer.id);
+        if (payerUpdateResult.isFailure) {
+            await this.rejectTransaction(transactionInProgress.id);
+            return Result.fail(payerUpdateResult.getErrorValue());
         }
 
-        console.log(transactionInProgess.id);
-
-        const transactionApprovedOrError = await this.approveTransaction(transactionInProgess.id);
-
-
-        if (transactionApprovedOrError.isFailure) {
-            await this.rejectTransaction(transactionInProgess.id);
-            return Result.fail(transactionApprovedOrError.getErrorValue());
+        payee.credit(transactionData.amount);
+        const payeeUpdateResult = await this.walletRepository.update(payee, payee.id);
+        if (payeeUpdateResult.isFailure) {
+            await this.rejectTransaction(transactionInProgress.id);
+            return Result.fail(payeeUpdateResult.getErrorValue());
         }
 
-        return Result.ok(transactionApprovedOrError.value);
+        const transactionApprovalResult = await this.approveTransaction(transactionInProgress.id);
+        if (transactionApprovalResult.isFailure) {
+            await this.rejectTransaction(transactionInProgress.id);
+            return Result.fail(transactionApprovalResult.getErrorValue());
+        }
+
+        return Result.ok(transactionApprovalResult.value);
     }
 }

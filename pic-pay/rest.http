@@ -1,0 +1,16 @@
+POST http://localhost:3333/create-wallet
+Content-Type: application/json
+
+{
+    "name": "John Doe",
+    "cpf": "11290725500",
+    "email": "john.doe@example.com",
+    "phone": "12345678901",
+    "balance": 1000.0,
+    "password": "securePassword123",
+    "walletType": 1
+}
+
+
+###
+GET http://localhost:3333/wallet/bf1c6c80-44cc-4064-9bf6-4f460dd4258a

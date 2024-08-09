@@ -1,9 +1,10 @@
 import FindWalletByEmail from "./find-wallet-by-email";
 import { CreateWalletDto, WALLET_TYPE } from "../wallet";
-import { WalletRepositoryMock } from "../../../utils";
+import { MailProviderMock, WalletRepositoryMock } from "../../../utils";
 import { WalletRepository } from "../wallet-repository";
 import { describe, beforeEach, it, expect } from "vitest";
 import CreateWallet from "./create-wallet";
+import MailProvider from "../../providers/mail/mail-provider";
 
 const WALLET_DATA: CreateWalletDto = {
     name: "John Doe",
@@ -17,13 +18,15 @@ const WALLET_DATA: CreateWalletDto = {
 
 describe("FindWalletByEmail", () => {
     let createWallet: CreateWallet;
+    let mailProvider: MailProvider;
     let findWalletByEmail: FindWalletByEmail;
     let walletRepository: WalletRepository;
 
     beforeEach(async () => {
         walletRepository = new WalletRepositoryMock();
         findWalletByEmail = new FindWalletByEmail(walletRepository);
-        createWallet = new CreateWallet(walletRepository);
+        mailProvider = new MailProviderMock();
+        createWallet = new CreateWallet(walletRepository, mailProvider);
 
         await createWallet.execute(WALLET_DATA);
 

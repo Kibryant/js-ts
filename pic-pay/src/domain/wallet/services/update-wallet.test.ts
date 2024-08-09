@@ -1,12 +1,14 @@
 import Wallet, { WALLET_TYPE } from "../wallet";
 import { describe, beforeEach, it, expect } from "vitest";
 import { WalletRepository } from "../wallet-repository";
-import { WalletRepositoryMock } from "../../../utils";
+import { MailProviderMock, WalletRepositoryMock } from "../../../utils";
 import UpdateWallet from "./update-wallet";
 import CreateWallet from "./create-wallet";
+import MailProvider from "../../providers/mail/mail-provider";
 
 describe("Update Wallet", () => {
     let wallet: Wallet;
+    let mailProvider: MailProvider;
     let createWallet: CreateWallet;
     let updateWallet: UpdateWallet;
     let walletRepository: WalletRepository;
@@ -14,7 +16,8 @@ describe("Update Wallet", () => {
     beforeEach(async () => {
         walletRepository = new WalletRepositoryMock();
         updateWallet = new UpdateWallet(walletRepository);
-        createWallet = new CreateWallet(walletRepository);
+        mailProvider = new MailProviderMock();
+        createWallet = new CreateWallet(walletRepository, mailProvider);
         const result = await createWallet.execute({
             balance: 1000,
             cpf: "11290725500",

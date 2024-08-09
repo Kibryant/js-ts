@@ -1,0 +1,28 @@
+# Ignorar arquivos .env
+**/.env
+
+# Ignorar diretórios .vscode
+**/.vscode/
+
+# Ignorar diretórios dist
+**/dist/
+
+# Ignorar arquivos ou diretórios gerados por sistema operacional
+**/.DS_Store
+**/Thumbs.db
+
+# Ignorar node_modules (caso seu projeto use Node.js)
+**/node_modules/
+
+# Ignorar logs
+**/*.log
+
+# Ignorar caches do editor
+**/.idea/
+**/.vscode/
+
+# Ignorar arquivos de build
+**/dist/
+
+# Ignorar arquivos coverage
+**/coverage/

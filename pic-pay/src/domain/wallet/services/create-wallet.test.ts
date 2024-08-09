@@ -2,15 +2,18 @@ import CreateWallet from "./create-wallet";
 import Wallet, { WALLET_TYPE } from "../wallet";
 import { describe, beforeEach, it, expect } from "vitest";
 import { WalletRepository } from "../wallet-repository";
-import { WalletRepositoryMock } from "../../../utils";
+import { MailProviderMock, WalletRepositoryMock } from "../../../utils";
+import MailProvider from "../../providers/mail/mail-provider";
 
 describe("CreateWallet", () => {
     let createWallet: CreateWallet;
+    let mailProvider: MailProvider;
     let walletRepository: WalletRepository;
 
     beforeEach(() => {
         walletRepository = new WalletRepositoryMock();
-        createWallet = new CreateWallet(walletRepository);
+        mailProvider = new MailProviderMock();
+        createWallet = new CreateWallet(walletRepository, mailProvider);
     });
 
     it("should create a wallet successfully", async () => {

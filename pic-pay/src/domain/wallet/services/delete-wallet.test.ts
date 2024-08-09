@@ -2,19 +2,22 @@ import DeleteWallet from './delete-wallet';
 import CreateWallet from './create-wallet';
 import { WalletRepository } from '../wallet-repository';
 import Result from '../../../shared/result';
-import { WalletRepositoryMock } from '../../../utils';
+import { MailProviderMock, WalletRepositoryMock } from '../../../utils';
 import { describe, expect, it, beforeEach } from 'vitest';
 import { WALLET_TYPE } from '../wallet';
+import MailProvider from '../../providers/mail/mail-provider';
 
 describe('DeleteWallet', () => {
     let createWallet: CreateWallet;
+    let mailProvider: MailProvider;
     let deleteWallet: DeleteWallet;
     let walletRepository: WalletRepository;
 
     beforeEach(() => {
         walletRepository = new WalletRepositoryMock();
         deleteWallet = new DeleteWallet(walletRepository);
-        createWallet = new CreateWallet(walletRepository);
+        mailProvider = new MailProviderMock();
+        createWallet = new CreateWallet(walletRepository, mailProvider);
     });
 
     it('should delete a wallet successfully', async () => {

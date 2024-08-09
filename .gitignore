@@ -19,7 +19,7 @@
 
 # Ignorar caches do editor
 **/.idea/
-**/.vscode/
+**/.vscode
 
 # Ignorar arquivos de build
 **/dist/

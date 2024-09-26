@@ -1,0 +1,12 @@
+name: nlw-pocket-server-development
+
+services:
+  postgres:
+    container_name: nlw-pocket-postgres-development
+    image: bitnami/postgresql:13.16.0
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRESQL_USERNAME=nlw_pocket_development
+      - POSTGRESQL_PASSWORD=nlw_pocket_development
+      - POSTGRESQL_DATABASE=nlw_pocket_development

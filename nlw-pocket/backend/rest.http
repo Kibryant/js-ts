@@ -1,0 +1,27 @@
+GET http://localhost:3333/pending-goals
+
+
+###
+
+
+POST http://localhost:3333/create-goal
+Content-Type: application/json
+
+{
+  "title": "Learn React",
+  "desiredWeeklyFrequency": 3
+}
+
+
+###
+POST http://localhost:3333/goal-completions
+Content-Type: application/json
+
+{
+  "goalId": "ggup6cl41qaimytmttbev0fh"
+}
+
+
+###
+
+GET http://localhost:3333/week-summary
